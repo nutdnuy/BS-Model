@@ -156,15 +156,19 @@ class BS:
 
 
 # Function to calculate Greeks for a range of strikes
-def calculate_greeks(spot, rate, dte, volatility, strikes):
+def calculate_greeks(spot, rate, dte, volatility, strikes,option_type ):
     deltas = []
     gammas = []
     vegas = []
     thetas = []
     
     for strike in strikes:
+        
         option = BS(spot, strike, rate, dte, volatility)
-        deltas.append(option.callDelta)
+        if option_type ='call' : 
+            deltas.append(option.callDelta)
+        else : 
+            deltas.append(option.putlDelta)
         gammas.append(option.gamma)
         vegas.append(option.vega)
         thetas.append(option.callTheta)
