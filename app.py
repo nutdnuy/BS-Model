@@ -165,7 +165,7 @@ def calculate_greeks(spot, rate, dte, volatility, strikes,option_type ):
     for strike in strikes:
         
         option = BS(spot, strike, rate, dte, volatility)
-        if option_type ='call' : 
+        if option_type =='call' : 
             deltas.append(option.callDelta)
         else : 
             deltas.append(option.putlDelta)
