@@ -252,6 +252,11 @@ volatility = st.sidebar.number_input('Volatility (as a decimal, e.g., 0.2 for 20
 min_strike = st.sidebar.number_input('Minimum Strike Price(for plot)', value=80.0)
 max_strike = st.sidebar.number_input('Maximum Strike Price(for plot)', value=120.0)
 num_strikes = st.sidebar.number_input('Number of Strike Prices(for plot)', value=50, step=1)
+st.sidebar.title('Donate')
+st.sidebar.image("img/QR_phatra.jpg", use_column_width=True)
+
+
+
 
 
 import plotly.graph_objects as go
