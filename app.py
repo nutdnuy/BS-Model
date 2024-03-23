@@ -248,6 +248,8 @@ with st.expander("Advanced Topics"):
 
 st.sidebar.title('Donate')
 st.sidebar.image("img/QR_phatra.jpg", use_column_width=True)
+# Option type selection
+option_type = st.sidebar.selectbox('Option Type', ['Call', 'Put'])
 spot = st.sidebar.number_input('Spot Price', value=100.0)
 rate = st.sidebar.number_input('Interest Rate (as a decimal, e.g., 0.05 for 5%)', value=0.05)
 dte = st.sidebar.number_input('Days to Expiration (in years, e.g., 0.5 for 6 months)', value=0.5)
@@ -264,10 +266,15 @@ num_strikes = st.sidebar.number_input('Number of Strike Prices(for plot)', value
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
+
+
+# Visualize Greeks button
 if st.sidebar.button('Visualize Greeks'):
-    st.title('Option Greeks Visualization')
     strikes = np.linspace(min_strike, max_strike, num=num_strikes)
-    deltas, gammas, vegas, thetas = calculate_greeks(spot, rate, dte, volatility, strikes)
+    if option_type == 'Call':
+        deltas, gammas, vegas, thetas = calculate_greeks(spot, rate, dte, volatility, strikes, option_type='call')
+    else:
+        deltas, gammas, vegas, thetas = calculate_greeks(spot, rate, dte, volatility, strikes, option_type='put')
     
     # Create subplots
     fig = make_subplots(
