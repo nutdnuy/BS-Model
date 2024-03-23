@@ -266,8 +266,6 @@ num_strikes = st.sidebar.number_input('Number of Strike Prices(for plot)', value
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-
-
 # Visualize Greeks button
 if st.sidebar.button('Visualize Greeks'):
     strikes = np.linspace(min_strike, max_strike, num=num_strikes)
@@ -277,19 +275,16 @@ if st.sidebar.button('Visualize Greeks'):
         deltas, gammas, vegas, thetas = calculate_greeks(spot, rate, dte, volatility, strikes, option_type='put')
     
     # Create subplots
-    fig = make_subplots(
-        rows=2, cols=2,
-        subplot_titles=('Delta', 'Gamma', 'Vega', 'Theta')
-    )
+    fig = make_subplots(rows=2, cols=2, subplot_titles=('Delta', 'Gamma', 'Vega', 'Theta'))
     
-    # Add traces
-    fig.add_trace(go.Scatter(x=strikes, y=deltas, mode='lines', name='Delta'), row=1, col=1)
-    fig.add_trace(go.Scatter(x=strikes, y=gammas, mode='lines', name='Gamma'), row=1, col=2)
-    fig.add_trace(go.Scatter(x=strikes, y=vegas, mode='lines', name='Vega'), row=2, col=1)
-    fig.add_trace(go.Scatter(x=strikes, y=thetas, mode='lines', name='Theta'), row=2, col=2)
+    # Add traces for the selected option type
+    fig.add_trace(go.Scatter(x=strikes, y=deltas, mode='lines', name=f'{option_type} Delta'), row=1, col=1)
+    fig.add_trace(go.Scatter(x=strikes, y=gammas, mode='lines', name=f'{option_type} Gamma'), row=1, col=2)
+    fig.add_trace(go.Scatter(x=strikes, y=vegas, mode='lines', name=f'{option_type} Vega'), row=2, col=1)
+    fig.add_trace(go.Scatter(x=strikes, y=thetas, mode='lines', name=f'{option_type} Theta'), row=2, col=2)
     
     # Update layout
-    fig.update_layout(height=600, width=800, title_text="Option Greeks Vs Strike")
+    fig.update_layout(height=600, width=800, title_text=f"Option Greeks Vs Strike - {option_type} Option")
     fig.update_layout(showlegend=False)
     
     # Show plot
