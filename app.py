@@ -245,6 +245,9 @@ with st.expander("Advanced Topics"):
 
 
 # Input fields for the option parameters in the sidebar
+
+st.sidebar.title('Donate')
+st.sidebar.image("img/QR_phatra.jpg", use_column_width=True)
 spot = st.sidebar.number_input('Spot Price', value=100.0)
 rate = st.sidebar.number_input('Interest Rate (as a decimal, e.g., 0.05 for 5%)', value=0.05)
 dte = st.sidebar.number_input('Days to Expiration (in years, e.g., 0.5 for 6 months)', value=0.5)
@@ -252,8 +255,7 @@ volatility = st.sidebar.number_input('Volatility (as a decimal, e.g., 0.2 for 20
 min_strike = st.sidebar.number_input('Minimum Strike Price(for plot)', value=80.0)
 max_strike = st.sidebar.number_input('Maximum Strike Price(for plot)', value=120.0)
 num_strikes = st.sidebar.number_input('Number of Strike Prices(for plot)', value=50, step=1)
-st.sidebar.title('Donate')
-st.sidebar.image("img/QR_phatra.jpg", use_column_width=True)
+
 
 
 
