@@ -174,7 +174,6 @@ def calculate_greeks(spot, rate, dte, volatility, strikes):
 
 
 # Streamlit app layout
-st.title('Option Greeks Visualization')
 # Introduction to the Black-Scholes Model
 st.title("Black-Scholes Model Overview")
 
@@ -245,20 +244,6 @@ with st.expander("Advanced Topics"):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Input fields for the option parameters in the sidebar
 spot = st.sidebar.number_input('Spot Price', value=100.0)
 rate = st.sidebar.number_input('Interest Rate (as a decimal, e.g., 0.05 for 5%)', value=0.05)
@@ -273,6 +258,7 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 if st.sidebar.button('Visualize Greeks'):
+    st.title('Option Greeks Visualization')
     strikes = np.linspace(min_strike, max_strike, num=num_strikes)
     deltas, gammas, vegas, thetas = calculate_greeks(spot, rate, dte, volatility, strikes)
     
