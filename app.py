@@ -73,7 +73,7 @@ class BS:
             self.__dict__[i] = None
         
         [self.callPrice, self.putPrice] = self._price
-        [self.callDelta, self.putDelta] = self._delta
+        [self.callDelta, self.putDelta] = self._delta      
         [self.callTheta, self.putTheta] = self._theta
         [self.callRho, self.putRho] = self._rho
         self.vega = self._vega
@@ -167,11 +167,14 @@ def calculate_greeks(spot, rate, dte, volatility, strikes,option_type ):
         option = BS(spot, strike, rate, dte, volatility)
         if option_type =='call' : 
             deltas.append(option.callDelta)
+            gammas.append(option.gamma)
+            vegas.append(option.vega)
+            thetas.append(option.callTheta)
         else : 
-            deltas.append(option.putlDelta)
-        gammas.append(option.gamma)
-        vegas.append(option.vega)
-        thetas.append(option.callTheta)
+            deltas.append(option.putDelta)
+            gammas.append(option.gamma)
+            vegas.append(option.vega)
+            thetas.append(option.putTheta)
     
     return deltas, gammas, vegas, thetas
 
