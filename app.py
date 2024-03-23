@@ -273,9 +273,9 @@ from plotly.subplots import make_subplots
 if st.sidebar.button('Visualize Greeks'):
     strikes = np.linspace(min_strike, max_strike, num=num_strikes)
     if option_type == 'Call':
-        deltas, gammas, vegas, thetas = calculate_greeks(spot, rate, dte, volatility, strikes)
+        deltas, gammas, vegas, thetas = calculate_greeks(spot, rate, dte, volatility, strikes, option_type='call')
     else:
-        deltas, gammas, vegas, thetas = calculate_greeks(spot, rate, dte, volatility, strikes)
+        deltas, gammas, vegas, thetas = calculate_greeks(spot, rate, dte, volatility, strikes, option_type='put')
     
     # Create subplots
     fig = make_subplots(rows=2, cols=2, subplot_titles=('Delta', 'Gamma', 'Vega', 'Theta'))
